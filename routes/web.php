@@ -17,6 +17,8 @@ Route::middleware(['auth', 'role:admin'])
 ->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('/stations/create',[StationController::class,'index'])->name('station.create');
+    Route::post('/stations/store',[StationController::class,'store'])->name('station.store');
+    Route::get('/stations/view',[StationController::class,'view'])->name('stations.view');
 });
 
 //User Routes
