@@ -32,17 +32,14 @@
                           title="Main"></i>
                   </li>
                   <li class="nav-item">
-                      <a href="  " class="nav-link active">
-                          <i class="icon-home4"></i>
-                          <span>
-                              Dashboard
-                          </span>
+                      <a href="{{route('admin.dashboard')}}" class="nav-link active"><i class="icon-home4"></i>
+                          <span>Dashboard</span>
                       </a>
                   </li>
                   <li class="nav-item nav-item-submenu">
                       <a href="#" class="nav-link"><i class="icon-train2"></i> <span>Stations</span></a>
                       <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                          <li class="nav-item"><a href="" class="nav-link active"><i class="icon-plus22"></i>
+                          <li class="nav-item"><a href="{{route('station.create')}}" class="nav-link active"><i class="icon-plus22"></i>
                                   Create</a></li>
                           <li class="nav-item"><a href="" class="nav-link active"><i class="icon-pencil4"></i>
                                   Edit</a></li>
