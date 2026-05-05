@@ -10,21 +10,21 @@
                         <div class="breadcrumb ml-0 mb-1">
                             <h5 class="breadcrumb-item py-0">Stations</h5>
                             {{-- <a href="components_breadcrumbs.html" class="breadcrumb-item py-0">View</a> --}}
-                            <h5 class="breadcrumb-item py-0 active">Create</h5>
+                            <h5 class="breadcrumb-item py-0 active">Edit</h5>
                         </div>
                     </div>
                     <div>
-                        <a href="{{ route('station.view') }}" class="btn-lg btn-info">View Stations</a>
+                        <a href="{{ route('station.view') }}" class="btn-lg btn-info">View Station</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-12 m-0 p-0">
+                <div class="col-12 p-0 m-0">
                     <div class="card">
                         <div class="card-header header-elements-inline">
-                            <h5 class="card-title">Create Station</h5>
+                            <h5 class="card-title">Edit Station</h5>
                             <div class="header-elements">
                                 <div class="list-icons">
                                     <a class="list-icons-item" data-action="collapse"></a>
@@ -33,18 +33,17 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('station.store') }}" method="POST">
+                            <form action="{{route('station.update',['id'=>$station->id])}}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="d-flex">
                                     <div class="form-group col-6">
                                         <label>Enter Station Name:<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" required class="form-control"
-                                            placeholder="Kamalapur (Dhaka)">
+                                        <input type="text" name="name" required class="form-control" value="{{$station->name}}">
                                     </div>
                                     <div class="form-group col-6">
                                         <label>Enter Station Code:<span class="text-danger">*</span></label>
-                                        <input type="text" name="code" required class="form-control"
-                                            placeholder="DHK">
+                                        <input type="text" name="code" required class="form-control" value="{{$station->code}}">
                                     </div>
                                 </div>
                                 <div class="text-center">

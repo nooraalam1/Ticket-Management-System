@@ -16,9 +16,12 @@ Route::middleware(['auth', 'role:admin'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-    Route::get('/stations/create',[StationController::class,'index'])->name('station.create');
-    Route::post('/stations/store',[StationController::class,'store'])->name('station.store');
-    Route::get('/stations/view',[StationController::class,'view'])->name('stations.view');
+    Route::get('/station/create',[StationController::class,'index'])->name('station.create');
+    Route::post('/station/store',[StationController::class,'store'])->name('station.store');
+    Route::get('/station/view',[StationController::class,'view'])->name('station.view');
+    Route::get('/station/edit/{id}',[StationController::class,'edit'])->name('station.edit');
+    Route::put('/station/update/{id}',[StationController::class,'update'])->name('station.update');
+    Route::get('/station/delete/{id}',[StationController::class,'delete'])->name('station.delete');
 });
 
 //User Routes

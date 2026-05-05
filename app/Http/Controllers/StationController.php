@@ -24,7 +24,7 @@ class StationController extends Controller
             ]);
             Station::create($data);
             DB::commit();
-            return redirect()->route('stations.view')->with('success', 'Station Added Successfully');
+            return redirect()->route('station.view')->with('success', 'Station Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', $e->getMessage());
@@ -33,6 +33,38 @@ class StationController extends Controller
 
     public function view()
     {
-        return view('admin.stations.view');
+        $stations = Station::latest()->get();
+        return view('admin.stations.view', compact('stations'));
+    }
+
+    public function edit($id)
+    {
+        $station = Station::findOrFail($id);
+        return view('admin.stations.edit', compact('station'));
+    }
+    public function update(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $data = $request->validate([
+                'name' => ['required', 'string'],
+                'code' => ['required', 'string'],
+            ]);
+            $station = Station::findOrFail($id);
+            $station->update($data);
+
+            DB::commit();
+
+            return redirect()->route('station.view')->with('success', 'Station Updated Successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
+    }
+    public function delete($id){
+        $station = Station::findOrFail($id);
+        $station->delete();
+
+        return redirect()->route('station.view')->with('success','Deleted Successfully');
     }
 }
