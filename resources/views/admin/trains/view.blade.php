@@ -1,5 +1,5 @@
 @extends('admin.partials.app')
-@section('title', 'Stations')
+@section('title', 'Trains')
 @section('content')
     <x-alerts />
     <div>
@@ -9,13 +9,13 @@
                 <div class="page-header-content header-elements-md-inline">
                     <div class="page-title">
                         <div class="breadcrumb ml-0 mb-1">
-                            <h5 class="breadcrumb-item py-0">Stations</h5>
+                            <h5 class="breadcrumb-item py-0">Trains</h5>
                             {{-- <a href="components_breadcrumbs.html" class="breadcrumb-item py-0">View</a> --}}
                             <h5 class="breadcrumb-item py-0 active">View</h5>
                         </div>
                     </div>
                     <div>
-                        <a href="{{ route('station.create') }}" class="btn-lg btn-info">Add Station</a>
+                        <a href="{{ route('train.create') }}" class="btn-lg btn-info">Add Train</a>
                     </div>
                 </div>
             </div>
@@ -26,22 +26,22 @@
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Station Name</th>
-                        <th>Station Code</th>
+                        <th>Train Name</th>
+                        <th>Train Number</th>
                         <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($stations as $key => $station)
+                    @foreach ($trains as $key => $train)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $station->name }}</td>
-                            <td>{{ $station->code }}</td>
+                            <td>{{ $train->name }}</td>
+                            <td>{{ $train->train_number }}</td>
                             <td class="d-flex align-items-center" style="gap:10px">
-                                <a href="{{ route('station.edit', ['id' => $station->id]) }}"
+                                <a href="{{ route('train.edit', ['id' => $train->id]) }}"
                                     class="btn btn-sm btn-outline-primary">Edit</a>
-                                <form action="{{ route('station.delete', ['id' => $station->id]) }}" action="POST">
+                                <form action="{{ route('train.delete', ['id' => $train->id]) }}" action="POST">
                                     @csrf
                                     <button
                                         class="btn btn-sm btn-outline bg-pink-400 text-pink-400 border-pink-400">Delete</button>

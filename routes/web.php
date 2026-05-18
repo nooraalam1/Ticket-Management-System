@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\TrainController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +17,27 @@ Route::middleware(['auth', 'role:admin'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-    Route::get('/station/create',[StationController::class,'index'])->name('station.create');
-    Route::post('/station/store',[StationController::class,'store'])->name('station.store');
-    Route::get('/station/view',[StationController::class,'view'])->name('station.view');
-    Route::get('/station/edit/{id}',[StationController::class,'edit'])->name('station.edit');
-    Route::put('/station/update/{id}',[StationController::class,'update'])->name('station.update');
-    Route::get('/station/delete/{id}',[StationController::class,'delete'])->name('station.delete');
+    
+    //station routes
+    Route::group(['prefix'=>'station', 'as'=> 'station.'],function(){
+        Route::get('/station/create',[StationController::class,'index'])->name('create');
+        Route::post('/station/store',[StationController::class,'store'])->name('store');
+        Route::get('/station/view',[StationController::class,'view'])->name('view');
+        Route::get('/station/edit/{id}',[StationController::class,'edit'])->name('edit');
+        Route::put('/station/update/{id}',[StationController::class,'update'])->name('update');
+        Route::get('/station/delete/{id}',[StationController::class,'delete'])->name('delete');
+    });
+
+    //train routes
+
+    Route::group(['prefix'=>'train','as'=>'train.'],function(){
+        Route::get('/train/create',[TrainController::class,'index'])->name('create');
+        Route::post('/train/store',[TrainController::class,'store'])->name('store');
+        Route::get('/train/view',[TrainController::class,'view'])->name('view');
+        Route::get('/train/edit/{id}',[TrainController::class,'edit'])->name('edit');
+        Route::put('/train/update/{id}',[TrainController::class,'update'])->name('update');
+        Route::get('/train/delete/{id}',[TrainController::class,'delete'])->name('delete');
+    });
 });
 
 //User Routes
