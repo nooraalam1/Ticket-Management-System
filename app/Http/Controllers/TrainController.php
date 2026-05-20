@@ -14,16 +14,17 @@ class TrainController extends Controller
     }
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'name' => ['required', 'string','unique:trains,name'],
+            'train_number' => ['required', 'string','unique:trains,train_number'],
+        ]);
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            $data = $request->validate([
-                'name' => ['required', 'string'],
-                'train_number' => ['required', 'string'],
-            ]);
             Train::create($data);
             DB::commit();
             return redirect()->route('train.view')->with('success', 'Train Added Successfully');
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', $e->getMessage());
         }
@@ -42,12 +43,12 @@ class TrainController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $data = $request->validate([
+            'name' => ['required', 'string','unique:trains,name'],
+            'train_number' => ['required', 'string','unique:trains,train_number'],
+        ]);
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            $data = $request->validate([
-                'name' => ['required', 'string'],
-                'train_number' => ['required', 'string'],
-            ]);
             $train = Train::findOrFail($id);
             $train->update($data);
 

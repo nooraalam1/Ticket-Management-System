@@ -39,12 +39,20 @@
                                     <div class="form-group col-6">
                                         <label>Enter Train Name:<span class="text-danger">*</span></label>
                                         <input type="text" name="name" required class="form-control"
-                                            placeholder="Mohanagar Express">
+                                            placeholder="Mohanagar Express" value="{{old('name')}}">
+
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-6">
                                         <label>Enter Train Number:<span class="text-danger">*</span></label>
                                         <input type="text" name="train_number" required class="form-control"
-                                            placeholder="740">
+                                            placeholder="740" value="{{old('train_number')}}">
+
+                                        @error('train_number')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="text-center">

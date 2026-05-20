@@ -40,10 +40,18 @@
                                     <div class="form-group col-6">
                                         <label>Enter Trains Name:<span class="text-danger">*</span></label>
                                         <input type="text" name="name" required class="form-control" value="{{$train->name}}">
+
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-6">
                                         <label>Enter Trains Number:<span class="text-danger">*</span></label>
                                         <input type="text" name="train_number" required class="form-control" value="{{$train->train_number}}">
+
+                                        @error('train_number')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="text-center">

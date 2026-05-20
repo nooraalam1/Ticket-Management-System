@@ -33,17 +33,28 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{route('station.update',['id'=>$station->id])}}" method="POST">
+                            <form action="{{ route('station.update', ['id' => $station->id]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="d-flex">
                                     <div class="form-group col-6">
                                         <label>Enter Station Name:<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" required class="form-control" value="{{$station->name}}">
+                                        <input type="text" name="name" required class="form-control"
+                                            value="{{ $station->name }}">
+
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-6">
                                         <label>Enter Station Code:<span class="text-danger">*</span></label>
-                                        <input type="text" name="code" required class="form-control" value="{{$station->code}}">
+                                        <input type="text" name="code" required class="form-control"
+                                            value="{{ $station->code }}">
+
+                                        @error('code')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
                                     </div>
                                 </div>
                                 <div class="text-center">

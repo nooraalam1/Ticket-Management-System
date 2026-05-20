@@ -16,12 +16,12 @@ class StationController extends Controller
     }
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'unique:stations,name'],
+            'code' => ['required', 'string', 'unique:stations,code'],
+        ]);
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            $data = $request->validate([
-                'name' => ['required', 'string'],
-                'code' => ['required', 'string'],
-            ]);
             Station::create($data);
             DB::commit();
             return redirect()->route('station.view')->with('success', 'Station Added Successfully');
@@ -44,12 +44,12 @@ class StationController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'unique:stations,name'],
+            'code' => ['required', 'string', 'unique:stations,code'],
+        ]);
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            $data = $request->validate([
-                'name' => ['required', 'string'],
-                'code' => ['required', 'string'],
-            ]);
             $station = Station::findOrFail($id);
             $station->update($data);
 
@@ -61,10 +61,11 @@ class StationController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $station = Station::findOrFail($id);
         $station->delete();
 
-        return redirect()->route('station.view')->with('success','Deleted Successfully');
+        return redirect()->route('station.view')->with('success', 'Deleted Successfully');
     }
 }

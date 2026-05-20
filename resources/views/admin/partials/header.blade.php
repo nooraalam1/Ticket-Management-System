@@ -30,13 +30,16 @@
                     data-toggle="dropdown">
                     <img src=" global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2"
                         height="34" alt="">
-                    <span>Victoria</span>
+                    <span>{{ auth()->user()->name }}</span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="dropdown-item"><i class="icon-switch2"></i>Logout</button>
+                    </form>
                 </div>
             </li>
         </ul>

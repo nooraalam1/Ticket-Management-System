@@ -35,16 +35,22 @@
                         <div class="card-body">
                             <form action="{{ route('station.store') }}" method="POST">
                                 @csrf
-                                <div class="d-flex">
+                                <div class="row">
                                     <div class="form-group col-6">
                                         <label>Enter Station Name:<span class="text-danger">*</span></label>
                                         <input type="text" name="name" required class="form-control"
-                                            placeholder="Kamalapur (Dhaka)">
+                                            placeholder="Kamalapur (Dhaka)" value="{{old('name')}}">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div class="form-group col-6">
                                         <label>Enter Station Code:<span class="text-danger">*</span></label>
                                         <input type="text" name="code" required class="form-control"
-                                            placeholder="DHK">
+                                            placeholder="DHK" value="{{old('code')}}">
+                                            @error('code')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                 </div>
                                 <div class="text-center">
