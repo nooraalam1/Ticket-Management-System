@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CoachController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\TrainController;
@@ -20,23 +21,34 @@ Route::middleware(['auth', 'role:admin'])
     
     //station routes
     Route::group(['prefix'=>'station', 'as'=> 'station.'],function(){
-        Route::get('/station/create',[StationController::class,'index'])->name('create');
-        Route::post('/station/store',[StationController::class,'store'])->name('store');
-        Route::get('/station/view',[StationController::class,'view'])->name('view');
-        Route::get('/station/edit/{id}',[StationController::class,'edit'])->name('edit');
-        Route::put('/station/update/{id}',[StationController::class,'update'])->name('update');
-        Route::get('/station/delete/{id}',[StationController::class,'delete'])->name('delete');
+        Route::get('/create',[StationController::class,'index'])->name('create');
+        Route::post('/store',[StationController::class,'store'])->name('store');
+        Route::get('/view',[StationController::class,'view'])->name('view');
+        Route::get('/edit/{id}',[StationController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[StationController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[StationController::class,'delete'])->name('delete');
     });
 
     //train routes
 
     Route::group(['prefix'=>'train','as'=>'train.'],function(){
-        Route::get('/train/create',[TrainController::class,'index'])->name('create');
-        Route::post('/train/store',[TrainController::class,'store'])->name('store');
-        Route::get('/train/view',[TrainController::class,'view'])->name('view');
-        Route::get('/train/edit/{id}',[TrainController::class,'edit'])->name('edit');
-        Route::put('/train/update/{id}',[TrainController::class,'update'])->name('update');
-        Route::get('/train/delete/{id}',[TrainController::class,'delete'])->name('delete');
+        Route::get('/create',[TrainController::class,'index'])->name('create');
+        Route::post('/store',[TrainController::class,'store'])->name('store');
+        Route::get('/view',[TrainController::class,'view'])->name('view');
+        Route::get('/edit/{id}',[TrainController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[TrainController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[TrainController::class,'delete'])->name('delete');
+    });
+
+    //coaches route
+
+    Route::group(['prefix'=>'coach','as'=>'coach.'],function(){
+        Route::get('/create',[CoachController::class,'index'])->name('create');
+        Route::post('/store',[CoachController::class,'store'])->name('store');
+        Route::get('/view',[CoachController::class,'view'])->name('view');
+        Route::get('/edit/{id}',[CoachController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[CoachController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[CoachController::class,'delete'])->name('delete');
     });
 });
 

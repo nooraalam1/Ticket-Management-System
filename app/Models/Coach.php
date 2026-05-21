@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coach extends Model
 {
-    protected $fillable = ['name','type'];
+    protected $fillable = ['train_id','name','type'];
 
 }
