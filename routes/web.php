@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::put('/update/{id}',[CoachController::class,'update'])->name('update');
         Route::get('/delete/{id}',[CoachController::class,'delete'])->name('delete');
     });
+
 });
 
 //User Routes
