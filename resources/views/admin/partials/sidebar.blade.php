@@ -54,7 +54,7 @@
                         <li class="nav-item"><a href="{{route('train.view')}}" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
-                <li class="nav-item nav-item-submenu">
+                {{-- <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-road"></i> <span>Route</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
                         <li class="nav-item"><a href="" class="nav-link active"><i class="icon-plus22"></i>
@@ -62,7 +62,7 @@
                         
                         <li class="nav-item"><a href="" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-map"></i> <span>Route Stops</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
@@ -80,7 +80,7 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-chair"></i> <span>Seats</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="{{ route('seat.create') }}" class="nav-link active"><i class="icon-plus22"></i>
                                 Create</a></li>
                         <li class="nav-item"><a href="" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
                     </ul>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Station;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use function Laravel\Prompts\alert;
+use Illuminate\Validation\Rule;
 
 class StationController extends Controller
 {
@@ -44,13 +44,15 @@ class StationController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $station = Station::findOrFail($id);
         $data = $request->validate([
-            'name' => ['required', 'string', 'unique:stations,name'],
-            'code' => ['required', 'string', 'unique:stations,code'],
+            'name' => ['required', 'string', Rule::unique('stations','name')->ignore($station->id)],
+            'code' => ['required', 'string', Rule::unique('stations','code')->ignore($station->id)],
         ]);
+
         DB::beginTransaction();
+
         try {
-            $station = Station::findOrFail($id);
             $station->update($data);
 
             DB::commit();

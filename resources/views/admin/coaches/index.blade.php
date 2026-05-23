@@ -2,6 +2,7 @@
 @section('title', 'Coaches')
 @section('content')
     <div>
+    <x-alerts/>
         <div class="mb-3 border-top-1 border-top-primary">
             <div class="page-header page-header-light"
                 style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; margin-bottom: 0;">
@@ -14,7 +15,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="#" class="btn-lg btn-info">View Coaches</a>
+                        <a href="{{ route('coach.view') }}" class="btn-lg btn-info">View Coaches</a>
                     </div>
                 </div>
             </div>

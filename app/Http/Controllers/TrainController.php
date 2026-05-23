@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class TrainController extends Controller
 {
@@ -43,13 +44,15 @@ class TrainController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $train = Train::findOrFail($id);
+
         $data = $request->validate([
-            'name' => ['required', 'string','unique:trains,name'],
-            'train_number' => ['required', 'string','unique:trains,train_number'],
+            'name' => ['required', 'string',Rule::unique('trains','name')->ignore($train->id)],
+            'train_number' => ['required', 'string',Rule::unique('trains','train_number')->ignore($train->id)],
         ]);
         DB::beginTransaction();
         try {
-            $train = Train::findOrFail($id);
+            
             $train->update($data);
 
             DB::commit();

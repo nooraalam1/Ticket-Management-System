@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seat extends Model
 {
-    protected $fillable = ['seat_number','seat_type'];
-
+    protected $fillable = ['coach_id','seat_number','seat_type'];
+    public function coach(){
+        return $this->belongsTo(Coach::class);
+    }
 }

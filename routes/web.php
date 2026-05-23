@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SeatController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\TrainController;
 use App\Http\Controllers\UserController;
@@ -49,6 +50,17 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/edit/{id}',[CoachController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[CoachController::class,'update'])->name('update');
         Route::get('/delete/{id}',[CoachController::class,'delete'])->name('delete');
+    });
+
+    //seats route
+
+    Route::group(['prefix'=>'seat','as'=>'seat.'],function(){
+        Route::get('/create',[SeatController::class,'index'])->name('create');
+        Route::post('/store',[SeatController::class,'store'])->name('store');
+        Route::get('/view',[SeatController::class,'view'])->name('view');
+        Route::get('/edit/{id}',[SeatController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[SeatController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[SeatController::class,'delete'])->name('delete');
     });
 
 });

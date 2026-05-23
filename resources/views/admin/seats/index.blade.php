@@ -1,5 +1,5 @@
 @extends('admin.partials.app')
-@section('title', 'Coaches')
+@section('title', 'Seats')
 @section('content')
     <div>
     <x-alerts/>
@@ -9,23 +9,23 @@
                 <div class="page-header-content header-elements-md-inline">
                     <div class="page-title">
                         <div class="breadcrumb ml-0 mb-1">
-                            <h5 class="breadcrumb-item py-0">Coaches</h5>
+                            <h5 class="breadcrumb-item py-0">Seats</h5>
                             {{-- <a href="components_breadcrumbs.html" class="breadcrumb-item py-0">View</a> --}}
-                            <h5 class="breadcrumb-item py-0 active">Edit</h5>
+                            <h5 class="breadcrumb-item py-0 active">Create</h5>
                         </div>
                     </div>
                     <div>
-                        <a href="{{ route('coach.view') }}" class="btn-lg btn-info">View Coaches</a>
+                        <a href="{{ route('seat.view') }}" class="btn-lg btn-info">View Seats</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-12 p-0 m-0">
+                <div class="col-12 m-0 p-0">
                     <div class="card">
                         <div class="card-header header-elements-inline">
-                            <h5 class="card-title">Edit Coach</h5>
+                            <h5 class="card-title">Create Seats</h5>
                             <div class="header-elements">
                                 <div class="list-icons">
                                     <a class="list-icons-item" data-action="collapse"></a>
@@ -34,32 +34,38 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('coach.update', ['id' => $coach->id]) }}" method="POST">
+                            <form action="{{ route('seat.store') }}" method="POST">
                                 @csrf
-                                @method('PUT')
                                 <div class="row">
                                     <div class="form-group col-4">
-                                        <label>Select Train:</label>
-                                        <select name="train_id" class="form-control select select2" required>
-                                            <option value="">Select Train</option>
-                                            @foreach ($trains as $train)
-                                            <option value="{{ $train->id }}">{{ $train->name }}</option>
+                                        <label>Select Coach:<span class="text-danger">*</span></label>
+                                        <select name="coach_id" class="form-control">
+                                            <option value="">--Select Coach--</option>
+                                            @foreach ($coaches as $coach)
+                                                <option value="{{ $coach->id }}">{{ $coach->name }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                    <div class="form-group col-4">
-                                        <label>Enter Coach Name:<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" required class="form-control" placeholder="KHA"
-                                            value="{{ $coach->name }}">
-                                        @error('name')
+                                        @error('coach_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-4">
-                                        <label>Enter Coach Type:<span class="text-danger">*</span></label>
-                                        <input type="text" name="type" required class="form-control" placeholder="AC"
-                                            value="{{$coach->type}}">
-                                        @error('type')
+                                        <label>Seat Number:<span class="text-danger">*</span></label>
+                                        <input type="text" name="seat_number" required class="form-control" placeholder="1"
+                                            value="{{old('seat_number')}}">
+                                        @error('seat_number')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Seat Type:<span class="text-danger">*</span></label>
+                                        <select name="seat_type" class="form-control">
+                                            <option value="">--Seat Type--</option>
+                                            <option value="window">Window</option>
+                                            <option value="chair">Chair</option>
+                                            <option value="middle">Middle</option>
+                                        </select>
+                                        @error('seat_type')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
