@@ -28,7 +28,7 @@
             <li class="nav-item dropdown dropdown-user">
                 <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle"
                     data-toggle="dropdown">
-                    <img src=" global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2"
+                    <img src="" class="rounded-circle mr-2"
                         height="34" alt="">
                     <span>{{ auth()->user()->name }}</span>
                 </a>

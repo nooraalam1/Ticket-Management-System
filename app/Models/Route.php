@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['train_id'];
+
+    public function routeStops(){
+        return $this->belongsTo(Route::class);
+    }
 }

@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\FareController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RouteController;
+use App\Http\Controllers\RoutestopController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\TrainController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +56,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/delete/{id}',[CoachController::class,'delete'])->name('delete');
     });
 
-    //seats route
+    //seats 
 
     Route::group(['prefix'=>'seat','as'=>'seat.'],function(){
         Route::get('/create',[SeatController::class,'index'])->name('create');
@@ -62,6 +66,42 @@ Route::middleware(['auth', 'role:admin'])
         Route::put('/update/{id}',[SeatController::class,'update'])->name('update');
         Route::get('/delete/{id}',[SeatController::class,'delete'])->name('delete');
     });
+
+    //Routes
+
+    Route::group(['prefix'=>'route','as'=>'route.'],function(){
+        Route::get('/create',[RouteController::class,'index'])->name('create');
+        Route::post('/store',[RouteController::class,'store'])->name('store');
+        Route::get('/view',[RouteController::class,'view'])->name('view');
+        // Route::get('/edit/{id}',[RouteController::class,'edit'])->name('edit');
+        // Route::put('/update/{id}',[RouteController::class,'update'])->name('update');
+        // Route::get('/delete/{id}',[RouteController::class,'delete'])->name('delete');
+    });
+
+    //Trips
+
+    Route::group(['prefix'=>'trip','as'=>'trip.'],function(){
+        Route::get('/create',[TripController::class,'index'])->name('create');
+        // Route::post('/store',[TripController::class,'store'])->name('store');
+        // Route::get('/view',[TripController::class,'view'])->name('view');
+        // Route::get('/edit/{id}',[TripController::class,'edit'])->name('edit');
+        // Route::put('/update/{id}',[TripController::class,'update'])->name('update');
+        // Route::get('/delete/{id}',[TripController::class,'delete'])->name('delete');
+    });
+    //Fares
+
+    Route::group(['prefix'=>'fare','as'=>'fare.'],function(){
+        Route::get('/create',[FareController::class,'index'])->name('create');
+        // Route::post('/store',[FareController::class,'store'])->name('store');
+        // Route::get('/view',[FareController::class,'view'])->name('view');
+        // Route::get('/edit/{id}',[FareController::class,'edit'])->name('edit');
+        // Route::put('/update/{id}',[FareController::class,'update'])->name('update');
+        // Route::get('/delete/{id}',[FareController::class,'delete'])->name('delete');
+    });
+
+    //other ajax routes
+
+    Route::get('/train-name/{id}',[RouteController::class,'trainName'])->name('trainName');
 
 });
 

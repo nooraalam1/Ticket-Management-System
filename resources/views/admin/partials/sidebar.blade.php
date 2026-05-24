@@ -46,63 +46,77 @@
                                     class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
+
+                {{-- Trains --}}
+
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-train"></i> <span>Trains</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('train.create') }}" class="nav-link active"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="{{ route('train.create') }}" class="nav-link active"><i
+                                    class="icon-plus22"></i>
                                 Create</a></li>
-                        <li class="nav-item"><a href="{{route('train.view')}}" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
+                        <li class="nav-item"><a href="{{route('train.view')}}" class="nav-link active"><i
+                                    class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
-                {{-- <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-road"></i> <span>Route</span></a>
-                    <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-plus22"></i>
-                                Create</a></li>
-                        
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
-                    </ul>
-                </li> --}}
+
+                {{-- Route Stops --}}
+
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-map"></i> <span>Route Stops</span></a>
+                    <a href="#" class="nav-link"><i class="icon-map"></i> <span>Routes</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="  " class="nav-link active">Default layout</a></li>
+
+                        <li class="nav-item"><a href="{{ route('route.create') }}" class="nav-link active"><i class="icon-plus22"></i>Create</a></li>
+
+                        <li class="nav-item"><a href="{{ route('route.view') }}" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
+
                     </ul>
                 </li>
+
+                {{-- Coaches --}}
+
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-grid"></i> <span>Coaches</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('coach.create') }}" class="nav-link active"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="{{ route('coach.create') }}" class="nav-link active"><i
+                                    class="icon-plus22"></i>
                                 Create</a></li>
-                        <li class="nav-item"><a href="{{ route('coach.view') }}" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
+                        <li class="nav-item"><a href="{{ route('coach.view') }}" class="nav-link active"><i
+                                    class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
+
+                {{-- Seats --}}
+
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-chair"></i> <span>Seats</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('seat.create') }}" class="nav-link active"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="{{ route('seat.create') }}" class="nav-link active"><i
+                                    class="icon-plus22"></i>
                                 Create</a></li>
                         <li class="nav-item"><a href="" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
+
+                {{-- Trips --}}
+
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-location4"></i> <span>Trips</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="#" class="nav-link active"><i class="icon-plus22"></i>
                                 Create</a></li>
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-pencil4"></i> Edit</a>
-                        </li>
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
+                        <li class="nav-item"><a href="{{ route('trip.create') }}" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
+
+                {{-- Fares --}}
+
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-price-tag"></i> <span>Fares</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="{{ route('fare.create') }}" class="nav-link active"><i class="icon-plus22"></i>
                                 Create</a></li>
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-pencil4"></i> Edit</a>
-                        </li>
-                        <li class="nav-item"><a href="" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link active"><i class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu">

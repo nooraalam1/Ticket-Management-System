@@ -46,6 +46,7 @@
 	<script src="{{asset('global_assets/js/plugins/tables/datatables/extensions/pdfmake/vfs_fonts.min.js')}}"></script>
 	<script src="{{asset('global_assets/js/plugins/tables/datatables/extensions/buttons.min.js')}}"></script>
 	<script src="{{asset('global_assets/js/demo_pages/datatables_extension_buttons_html5.js')}}"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
 
 </head>
 
