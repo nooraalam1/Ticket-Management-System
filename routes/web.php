@@ -2,15 +2,17 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\UserController\DashboardController;
 use App\Http\Controllers\FareController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
-use App\Http\Controllers\RoutestopController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\TrainController;
 use App\Http\Controllers\TripController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController\ContactController;
+use App\Http\Controllers\UserController\TraininfoController;
+use App\Http\Controllers\UserController\VerifyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,7 +25,7 @@ Route::middleware(['auth', 'role:admin'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-    
+
     //station routes
     Route::group(['prefix'=>'station', 'as'=> 'station.'],function(){
         Route::get('/create',[StationController::class,'index'])->name('create');
@@ -56,7 +58,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/delete/{id}',[CoachController::class,'delete'])->name('delete');
     });
 
-    //seats 
+    //seats
 
     Route::group(['prefix'=>'seat','as'=>'seat.'],function(){
         Route::get('/create',[SeatController::class,'index'])->name('create');
@@ -109,7 +111,10 @@ Route::middleware(['auth', 'role:admin'])
 
 Route::middleware(['auth', 'role:user'])
 ->group(function () {
-    Route::get('/dashboard',[UserController::class,'index'])->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/train-info',[TraininfoController::class,'index'])->name('traininfo');
+    Route::get('/verify-ticket',[VerifyController::class,'index'])->name('verifyticket');
+    Route::get('/contact',[ContactController::class,'index'])->name('contact');
 });
 
 //Common Routes

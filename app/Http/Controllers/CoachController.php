@@ -6,7 +6,6 @@ use App\Models\Coach;
 use App\Models\Train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class CoachController extends Controller
 {
@@ -70,7 +69,7 @@ class CoachController extends Controller
 
         DB::beginTransaction();
         try {
-            
+
             $coach->update($data);
 
             DB::commit();
