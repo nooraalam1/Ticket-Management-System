@@ -86,6 +86,7 @@
         is transferred or becomes subject to a different privacy policy.
     </p>
 </div>
+
 {{-- Privacy Modal --}}
 <div id="privacy" class="hidden fixed bg-white"
     style="top:7%; left:50%;transform:translateX(-50%); padding:15px; overflow-y:auto;max-height:85vh ">
