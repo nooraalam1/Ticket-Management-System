@@ -61,11 +61,5 @@ class RouteController extends Controller
 
         return view('admin.routes.view',compact('trains','stations'));
     }
-    public function trainName($id){
-        $data = Train::findOrFail($id);
-        return response()->json([
-            'id'=>$data->id,
-            'name'=> $data->name,
-        ]);
-    }
+
 }

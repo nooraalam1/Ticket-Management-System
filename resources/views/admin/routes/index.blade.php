@@ -106,7 +106,7 @@
 
                 if (id) {
                     $.ajax({
-                        url: '/admin/train-name/' + id,
+                        url: '/train-name/' + id,
                         type: 'GET',
                         success: function (data) {
                             $('#setTrainName').text(data.name)
