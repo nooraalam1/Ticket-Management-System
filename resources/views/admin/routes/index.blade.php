@@ -59,7 +59,7 @@
                                                 <th>Stop Order</th>
                                                 <th>Arrival Time</th>
                                                 <th>Departure Time</th>
-                                                <th>Action</th>
+                                                <th>Action <button class="ml-2 btn-sm btn-secondary">+</button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -117,6 +117,8 @@
                     $('#setTrainName').text('');
                 }
             });
+
+            
         });
     </script>
 @endsection

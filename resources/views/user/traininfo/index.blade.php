@@ -17,13 +17,13 @@
             @endforeach
         </select>
     </div>
-    <div class="text-white text-center">
+    <div class="text-white text-center ">
         <h4>Showing Train Information of: <span id="setTrainName"></span></h4>
     </div>
 </x-app-layout>
 
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 <script>
     $(document).ready(function(){
         $('#trainIdAjax').change(function(){
