@@ -100,7 +100,7 @@
                 var id = $(this).val()
                 if (id) {
                     $.ajax({
-                        url: '/admin/train-name/' + id,
+                        url: '/train-name/' + id,
                         method: 'GET',
                         success: function (data) {
                             $('#setTrainName').text(data.name)

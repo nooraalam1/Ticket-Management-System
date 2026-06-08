@@ -39,7 +39,8 @@
                                 <div class="row">
                                     <div class="form-group col-4">
                                         <label>Select Train: <span class="text-danger">*</span></label>
-                                        <select id="trainIdAjax" name="train_id" class="form-control select select2" required>
+                                        <select id="trainIdAjax" name="train_id" class="form-control select select2"
+                                            required>
                                             <option value="">Select Train</option>
                                             @foreach ($trains as $train)
                                                 <option value="{{ $train->id }}">{{ $train->name }}</option>
@@ -50,7 +51,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <h3 class="text-center">Add Route Details for <span id="setTrainName"></span></h3>
+                                <h3 class="text-center">Add Route Details for <span id="setTrainName" style="color:green; font-weight:bold"></span></h3>
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
                                         <thead>
@@ -59,37 +60,39 @@
                                                 <th>Stop Order</th>
                                                 <th>Arrival Time</th>
                                                 <th>Departure Time</th>
-                                                <th>Action <button class="ml-2 btn-sm btn-secondary">+</button></th>
+                                                <th>Action <button type="button" class="btn btn-sm btn-info" id="addRow">+</button></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id= "routeTableBody">
                                             <tr style="text-align: center;">
                                                 <td>
-                                                    <select name="station_id" class="form-control select select2"
-                                                        required>
+                                                    <select name="station_id[]" class="form-control select select2" required>
                                                         <option value="">Select Station</option>
                                                         @foreach ($stations as $station)
-                                                            <option value="{{ $train->id }}">{{ $station->name }}</option>
+                                                            <option value="{{ $station->id }}">{{ $station->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="stop_order" min="1">
+                                                    <input type="number" name="stop_order[]" min="1">
                                                 </td>
                                                 <td>
-                                                    <input type="time" name="arrival_time">
+                                                    <input type="time" name="arrival_time[]">
                                                 </td>
                                                 <td>
-                                                <input type="time" name="departure_time">
+                                                    <input type="time" name="departure_time[]">
                                                 </td>
                                                 <td>
 
-                                                    <input class="btn btn-sm btn-primary" type="Submit" >
-                                                    <button class="btn btn-sm btn-danger">RESET</button>
+                                                    <button type="button" class="btn btn-sm btn-danger deleteRow"><i class="icon-trash"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="d-flex justify-content-end mt-4">
+                                    <input type="submit" class="btn btn-primary">
                                 </div>
                             </form>
                         </div>
@@ -100,25 +103,63 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('#trainIdAjax').change(function () {
+        $(document).ready(function() {
+            $('#trainIdAjax').change(function() {
                 var id = $(this).val()
 
                 if (id) {
                     $.ajax({
                         url: '/train-name/' + id,
                         type: 'GET',
-                        success: function (data) {
+                        success: function(data) {
                             $('#setTrainName').text(data.name)
                         },
                     });
-                }
-                else {
+                } else {
                     $('#setTrainName').text('');
                 }
             });
 
-            
+            $('#addRow').click(function() {
+                let newRow = `
+                <tr style="text-align: center;">
+                    <td>
+                        <select name="station_id[]" class="form-control select select2" required>
+                            <option value="">Select Station</option>
+                            @foreach ($stations as $station)
+                                <option value="{{ $station->id }}">{{ $station->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" name="stop_order[]" min="1">
+                    </td>
+                    <td>
+                        <input type="time" name="arrival_time[]">
+                    </td>
+                    <td>
+                        <input type="time" name="departure_time[]">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger deleteRow"><i class="icon-trash"></i></button>
+                    </td>
+                </tr>
+
+                `
+
+            $('#routeTableBody').append(newRow)
+
+            })
+            $(document).on('click','.deleteRow',function(){
+                if($('.deleteRow').length > 1){
+                    $(this).closest('tr').remove();
+                }
+                else{
+                    alert('At Least One Row Must Remain')
+                }
+            })
+
         });
     </script>
 @endsection

@@ -21,10 +21,18 @@ class RouteController extends Controller
 
         $data = $request->validate([
             'train_id'=>['required'],
-            'station_id'=>['required'],
-            'stop_order'=>['required'],
-            'arrival_time'=>['required'],
-            'departure_time'=>['required'],
+
+            'station_id'=>['required','array'],
+            'station_id.*'=>['required'],
+
+            'stop_order'=>['required','array'],
+            'stop_order.*'=>['required'],
+
+            'arrival_time'=>['required','array'],
+            'arrival_time.*'=>['required'],
+
+            'departure_time'=>['required','array'],
+            'departure_time.*'=>['required'],
         ]);
 
         DB::beginTransaction();
@@ -33,14 +41,16 @@ class RouteController extends Controller
             $route = Route::create([
                 'train_id' => $request->train_id,
             ]);
+            foreach($request->station_id as $key=> $stationId){
 
-            RouteStop::create([
-                'route_id' => $route->id,
-                'station_id' => $request->station_id,
-                'stop_order' => $request->stop_order,
-                'arrival_time' => $request->arrival_time,
-                'departure_time' => $request->departure_time,
-            ]);
+                RouteStop::create([
+                    'route_id' => $route->id,
+                    'station_id' => $stationId,
+                    'stop_order' => $request->stop_order[$key],
+                    'arrival_time' => $request->arrival_time[$key],
+                    'departure_time' => $request->departure_time[$key],
+                ]);
+            }
 
             DB::commit();
 
