@@ -22,8 +22,15 @@ class StationController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            Station::create($data);
+            $station = Station::create($data);
             DB::commit();
+            if($request->ajax()){
+                return response()->json([
+                    'status' => 'success',
+                    'message'=> 'Station Added Successfully',
+                    'station' => $station,
+                ]);
+            }
             return redirect()->route('station.view')->with('success', 'Station Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -69,5 +76,15 @@ class StationController extends Controller
         $station->delete();
 
         return redirect()->route('station.view')->with('success', 'Deleted Successfully');
+    }
+
+    public function checkDuplicate(Request $request){
+        $nameExists = Station::where('name',$request->name)->exists();
+        $codeExists = Station::where('code',$request->code)->exists();
+
+        return response()->json([
+            'nameExists'=>$nameExists,
+            'codeExists'=>$codeExists,
+        ]);
     }
 }

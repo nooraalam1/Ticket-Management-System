@@ -51,7 +51,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <h3 class="text-center">Route Details for <span id="setTrainName"></span></h3>
+                                <h3 class="text-center">Route Details for <span id="setTrainName" style="color:green; font-weight:bold"></span></h3>
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
                                         <thead>
@@ -67,7 +67,7 @@
                                             <tr style="text-align: center;">
                                                     @foreach ($stations as $station)
                                                 <td id="station">
-                                                    
+
                                                 </td>
                                                     @endforeach
                                                 <td>

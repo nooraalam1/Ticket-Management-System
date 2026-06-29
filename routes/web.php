@@ -35,6 +35,8 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/edit/{id}', [StationController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [StationController::class, 'update'])->name('update');
             Route::get('/delete/{id}', [StationController::class, 'delete'])->name('delete');
+
+            Route::post('/checkDuplicate',[StationController::class,'checkDuplicate'])->name('checkDuplicate');
         });
 
         //train routes
