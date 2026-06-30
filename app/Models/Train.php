@@ -7,4 +7,7 @@ class Train extends Model
 {
     protected $fillable = ['name', 'train_number'];
 
+    public function route(){
+        return $this->hasOne(Route::class);
+    }
 }

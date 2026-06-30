@@ -47,7 +47,7 @@
                                             required>
                                             <option value="">Select Train</option>
                                             @foreach ($trains as $train)
-                                                <option value="{{ $train->id }}">{{ $train->name }}</option>
+                                                <option value="{{ $train->id }}">{{ $train->name }} | {{$train->train_number}}</option>
                                             @endforeach
                                         </select>
                                         @error('train_id')
@@ -120,7 +120,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body p-0">
                                         <div class="card-body">
                                             <form action="{{ route('station.store') }}" method="POST">
                                                 @csrf
@@ -151,7 +151,6 @@
                                             </form>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -166,7 +165,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body p-0">
                                         <div class="card-body">
                                             <form action="{{ route('train.store') }}" method="POST">
                                                 @csrf
@@ -229,11 +228,12 @@
                 }
             });
 
+            // Add Row
             $('#addRow').click(function() {
                 let newRow = `
                     <tr style="text-align: center;">
                         <td>
-                            <select name="station_id[]" class="form-control select select2" required>
+                            <select name="station_id[]" class="form-control select select2 stationSelect" required>
                                 <option value="">Select Station</option>
                                 @foreach ($stations as $station)
                                     <option value="{{ $station->id }}">{{ $station->name }}</option>
@@ -330,7 +330,7 @@
 
                         $('.stationSelect').append(
                             `
-                            <option value = "${response.station.id}" selected> ${response.station.name}  </option>
+                            <option value = "${response.station.id}"> ${response.station.name}  </option>
 
                             `
                         );
@@ -422,7 +422,7 @@
                         $('.allTrains').append(
 
                         `
-                            <option value="${response.train.id}" selected>${response.train.name}</option>
+                            <option value="${response.train.id}" selected>${response.train.name} | ${response.train.train_number}</option>
                         `
                         );
 
@@ -435,8 +435,6 @@
                     }
                 });
             });
-
-
 
         });
     </script>

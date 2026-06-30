@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Station extends Model
 {
-    protected $fillable = ['name','code'];
+    protected $fillable = ['name', 'code'];
+    public function routeStops()
+    {
+        return $this->hasMany(RouteStop::class);
+    }
 }

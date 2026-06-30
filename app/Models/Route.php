@@ -8,7 +8,9 @@ class Route extends Model
 {
     protected $fillable = ['train_id'];
 
-    public function routeStops(){
-        return $this->belongsTo(Route::class);
+    public function train(){
+        return $this->belongsTo(Train::class);
+    }    public function routeStops(){
+        return $this->hasMany(RouteStop::class);
     }
 }

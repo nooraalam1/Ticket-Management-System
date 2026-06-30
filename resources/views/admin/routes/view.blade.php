@@ -63,28 +63,28 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {{-- <tbody>
                                             <tr style="text-align: center;">
-                                                    @foreach ($stations as $station)
-                                                <td id="station">
 
+                                                <td >
+                                                    <p name="name" id="station"></p>
                                                 </td>
-                                                    @endforeach
+
                                                 <td>
-                                                    <input type="number" name="stop_order" min="1">
+                                                    <p name="stop_order" id="stop_order"></p>
                                                 </td>
                                                 <td>
-                                                    <input type="time" name="arrival_time">
+                                                    <p name="arrival_time" id="arrival_time"></p>
                                                 </td>
                                                 <td>
-                                                    <input type="time" name="departure_time">
+                                                    <p name="departure_time" id="departure_time"></p>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger">Edit</button>
                                                     <button class="btn btn-sm btn-danger">Delete</button>
                                                 </td>
                                             </tr>
-                                        </tbody>
+                                        </tbody> --}}
                                     </table>
                                 </div>
                             </form>
@@ -95,23 +95,57 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $('#trainIdAjax').change(function () {
-                var id = $(this).val()
-                if (id) {
-                    $.ajax({
-                        url: '/train-name/' + id,
-                        method: 'GET',
-                        success: function (data) {
-                            $('#setTrainName').text(data.name)
-                            //$('#station').text(data.id)
-                        }
-                    })
-                }
-                else {
-                    $('#setTrainName').text('')
-                }
-            });
+        $(document).ready(function(){
+            $('#trainIdAjax').on('change',function(){
+                let id = $(this).val();
+
+               if(id){
+                $.ajax({
+                    url:"/train-name/" + id,
+                    type:"GET",
+                    success:function(response){
+                        $('#setTrainName').text(response.train.name);
+                        let trainName = response.train.name;
+                        let x = response.train.route.route_stops;
+                        x.forEach(function(data){
+                            let row =
+                                     `<tbody>
+                                            <tr style="text-align: center;">
+
+                                                <td >
+                                                    ${data.station.name}
+                                                </td>
+
+                                                <td>
+                                                    ${data.stop_order}
+                                                </td>
+                                                <td>
+                                                    ${data.arrival_time}
+                                                </td>
+                                                <td>
+                                                    ${data.departure_time}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger">Edit</button>
+                                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                            `
+                            $(".table").append(row)
+                        })
+
+                    },
+                    error:function(xhr){
+                        alert("Something went wrong!");
+                    }
+                });
+               }
+               else{
+                 $('#setTrainName').text('');
+               }
+            })
         });
     </script>
 @endsection

@@ -9,10 +9,9 @@ class AjaxController extends Controller
 {
     public function trainName($id)
     {
-        $data = Train::findOrFail($id);
+        $train = Train::with('route.routeStops.station')->findOrFail($id);
         return response()->json([
-            'id' => $data->id,
-            'name' => $data->name,
+            'train'=>$train,
         ]);
     }
 }
