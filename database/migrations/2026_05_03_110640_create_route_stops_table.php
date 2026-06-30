@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('route_id')->constrained()->onDelete('cascade');
             $table->foreignId('station_id')->constrained()->onDelete('cascade');
             $table->string('stop_order');
-            $table->string('arrival_time');
-            $table->string('departure_time');
+            $table->time('arrival_time');
+            $table->time('departure_time');
             $table->timestamps();
         });
     }

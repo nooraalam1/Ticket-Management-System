@@ -63,28 +63,9 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        {{-- <tbody>
-                                            <tr style="text-align: center;">
+                                        <tbody id="tbody">
 
-                                                <td >
-                                                    <p name="name" id="station"></p>
-                                                </td>
-
-                                                <td>
-                                                    <p name="stop_order" id="stop_order"></p>
-                                                </td>
-                                                <td>
-                                                    <p name="arrival_time" id="arrival_time"></p>
-                                                </td>
-                                                <td>
-                                                    <p name="departure_time" id="departure_time"></p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-danger">Edit</button>
-                                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                                </td>
-                                            </tr>
-                                        </tbody> --}}
+                                        </tbody>
                                     </table>
                                 </div>
                             </form>
@@ -105,11 +86,13 @@
                     type:"GET",
                     success:function(response){
                         $('#setTrainName').text(response.train.name);
-                        let trainName = response.train.name;
+
+                        $("#tbody").html(" ");
+
                         let x = response.train.route.route_stops;
                         x.forEach(function(data){
                             let row =
-                                     `<tbody>
+                                     `
                                             <tr style="text-align: center;">
 
                                                 <td >
@@ -130,10 +113,12 @@
                                                     <button class="btn btn-sm btn-danger">Delete</button>
                                                 </td>
                                             </tr>
-                                        </tbody>
+
 
                             `
-                            $(".table").append(row)
+
+                            // $("#tbody").html(" ");
+                            $("#tbody").append(row)
                         })
 
                     },
