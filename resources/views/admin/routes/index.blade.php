@@ -38,8 +38,12 @@
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-4">
-                                        <label>Select Train: <span class="text-danger">*</span></label>
-                                        <select id="trainIdAjax" name="train_id" class="form-control select select2"
+                                        <label>
+                                            Select Train: <span class="text-danger">*</span>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#addTrain">+</button>
+                                        </label>
+                                        <select id="trainIdAjax" name="train_id" class="form-control allTrains select select2"
                                             required>
                                             <option value="">Select Train</option>
                                             @foreach ($trains as $train)
@@ -105,7 +109,7 @@
                             </form>
                         </div>
 
-                        <!-- Modal -->
+                        <!-- Modal For Station-->
                         <div class="modal fade" id="addStation" tabindex="-1" aria-labelledby="addStationLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -151,6 +155,55 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal For Train-->
+                        <div class="modal fade" id="addTrain" tabindex="-1" aria-labelledby="addTrainLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addTrainLabel">Add New Train</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card-body">
+                                            <form action="{{ route('train.store') }}" method="POST">
+                                                @csrf
+                                                <div class="d-flex">
+                                                    <div class="form-group col-6">
+                                                        <label>Enter Train Name:<span class="text-danger">*</span></label>
+                                                        <input type="text" name="name" required
+                                                            class="form-control" placeholder="Mohanagar Express"
+                                                            value="{{ old('name') }}" id="trainName">
+
+                                                        @error('name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group col-6">
+                                                        <label>Enter Train Number:<span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" name="train_number" required
+                                                            class="form-control" placeholder="740"
+                                                            value="{{ old('train_number') }}" id="trainNumber">
+
+                                                        @error('train_number')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <input type="submit" class="btn btn-primary" id="addTrainBtn"></input>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -159,6 +212,7 @@
 
     <script>
         $(document).ready(function() {
+
             $('#trainIdAjax').change(function() {
                 var id = $(this).val()
 
@@ -177,28 +231,27 @@
 
             $('#addRow').click(function() {
                 let newRow = `
-            <tr style="text-align: center;">
-                <td>
-                    <select name="station_id[]" class="form-control select select2" required>
-                        <option value="">Select Station</option>
-                        @foreach ($stations as $station)
-                            <option value="{{ $station->id }}">{{ $station->name }}</option>
-                        @endforeach
-                    </select>
-                </td>
-                <td> <input type="number" name="stop_order[]" min="1"> </td>
-                <td> <input type="time" name="arrival_time[]"> </td>
-                <td> <input type="time" name="departure_time[]"> </td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-danger deleteRow"><i class="icon-trash"></i></button>
-                </td>
-            </tr>
-
-            `
+                    <tr style="text-align: center;">
+                        <td>
+                            <select name="station_id[]" class="form-control select select2" required>
+                                <option value="">Select Station</option>
+                                @foreach ($stations as $station)
+                                    <option value="{{ $station->id }}">{{ $station->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td> <input type="number" name="stop_order[]" min="1"> </td>
+                        <td> <input type="time" name="arrival_time[]"> </td>
+                        <td> <input type="time" name="departure_time[]"> </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-danger deleteRow"><i class="icon-trash"></i></button>
+                        </td>
+                    </tr> `
 
                 $('#routeTableBody').append(newRow)
 
             })
+
             $(document).on('click', '.deleteRow', function() {
                 if ($('.deleteRow').length > 1) {
                     $(this).closest('tr').remove();
@@ -295,6 +348,95 @@
                     }
                 });
             })
+
+            $('#trainName,#trainNumber').on('keyup',function(){
+
+                let name = $('#trainName').val();
+                let train_number = $('#trainNumber').val();
+
+                $.ajax({
+                    url:"{{route('train.checkDuplicate')}}",
+                    type: "POST",
+                    data: {
+                        _token:"{{csrf_token()}}",
+                        name:name,
+                        train_number:train_number,
+                    },
+                    success:function(response){
+                        if(response.name == true){
+                            Swal.fire({
+                                icon:"warning",
+                                title: "Duplicate",
+                                text: "This Name Already Added",
+                            });
+                        $('#trainNumber').prop('readonly',true);
+                        $('#addTrainBtn').prop('disabled',true);
+                        }
+                        else if(response.train_number == true){
+                            Swal.fire({
+                                icon:"warning",
+                                title:"Duplicate",
+                                text:"This Number Already Added",
+                            });
+                        $('#trainName').prop('readonly',true);
+                        $('#addTrainBtn').prop('disabled',true);
+
+                        }
+                        else{
+                             $('#trainName').prop('readonly',false);
+                             $('#trainNumber').prop('readonly',false);
+
+                            $('#addTrainBtn').prop('disabled',false);
+
+                        }
+                    },
+                    error:function(xhr){
+                        console.log(xhr.responseJSON);
+                    }
+                });
+            });
+
+            $('#addTrainBtn').on('click',function(e){
+
+                e.preventDefault();
+
+                let name = $('#trainName').val();
+                let train_number = $('#trainNumber').val();
+
+                $.ajax({
+                    url: "{{route('train.store')}}",
+                    type: "POST",
+                    data: {
+                        _token:"{{csrf_token()}}",
+                        name:name,
+                        train_number:train_number,
+                    },
+                    success: function(response){
+
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: "Train Added Successfully",
+                        });
+
+                        $('.allTrains').append(
+
+                        `
+                            <option value="${response.train.id}" selected>${response.train.name}</option>
+                        `
+                        );
+
+                        $('#trainName').val('');
+                        $('#trainNumber').val('');
+                        $('#addTrain').modal('hide');
+                    },
+                    error: function(xhr){
+                        alert(xhr.responseJSON);
+                    }
+                });
+            });
+
+
 
         });
     </script>

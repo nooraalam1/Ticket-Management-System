@@ -48,6 +48,8 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/edit/{id}', [TrainController::class, 'edit'])->name('edit');
             Route::put('/update/{id}', [TrainController::class, 'update'])->name('update');
             Route::get('/delete/{id}', [TrainController::class, 'delete'])->name('delete');
+
+            Route::post('/checkDuplicate',[TrainController::class,'checkDuplicate'])->name('checkDuplicate');
         });
 
         //coaches route
