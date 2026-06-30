@@ -220,7 +220,7 @@
                         url: '/train-name/' + id,
                         type: 'GET',
                         success: function(data) {
-                            $('#setTrainName').text(data.name)
+                            $('#setTrainName').text(data.train.name)
                         },
                     });
                 } else {
