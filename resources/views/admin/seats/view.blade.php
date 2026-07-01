@@ -1,5 +1,5 @@
 @extends('admin.partials.app')
-@section('title', 'Seats')
+@section('title', 'Stations')
 @section('content')
     <x-alerts />
     <div>
@@ -21,38 +21,63 @@
             </div>
         </div>
 
-        <div class="card">
-            <table class="table datatable-button-html5-basic">
+        <div class="">
+            <div class="d-flex justify-content-center" style="gap: 10px">
+                <h2 class="">Select a coach to see seats:</h2>
+                <select name="coach" id="coach" class="form-control select select2 col-2">
+                    <option value="">Select Coach</option>
+                    @foreach ($coaches as $coach)
+                        <option value="{{$coach->id}}">{{$coach->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <h3 class="text-center">Seats for Coach: <span id="addCoachName"></span></h3>
+            <div class="card">
+                <table class="table">
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Coach</th>
-                        <th>Seat No</th>
+                        <th>Seat Number</th>
                         <th>Seat Type</th>
                         <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($seats as $key => $data)
+                    {{-- @foreach ($stations as $key => $station)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $data->coach->name }}</td>
-                            <td>{{ $data->seat_number }}</td>
-                            <td>{{ $data->seat_type }}</td>
+                            <td>{{ $station->name }}</td>
+                            <td>{{ $station->code }}</td>
                             <td class="d-flex align-items-center" style="gap:10px">
-                                <a href="{{ route('seat.edit',['id'=>$data->id]) }}"
+                                <a href="{{ route('station.edit', ['id' => $station->id]) }}"
                                     class="btn btn-sm btn-outline-primary">Edit</a>
-                                <form action="{{ route('seat.delete',['id'=>$data->id]) }}" action="POST">
+                                <form action="{{ route('station.delete', ['id' => $station->id]) }}" action="POST">
                                     @csrf
                                     <button
                                         class="btn btn-sm btn-outline bg-pink-400 text-pink-400 border-pink-400">Delete</button>
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#coach").on('change',function(){
+                var id = $(this).val();
+
+                $.ajax({
+                    url: '/coach-name/' +id,
+                    type:'GET',
+                    success: function(response){
+                        $('#addCoachName').text(response.coach.name);
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

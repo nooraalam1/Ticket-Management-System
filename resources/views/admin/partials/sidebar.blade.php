@@ -76,26 +76,29 @@
 
                 {{-- Coaches --}}
 
-                <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-grid"></i> <span>Coaches</span></a>
-                    <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('coach.create') }}" class="nav-link"><i
+                <li class="nav-item nav-item-submenu {{request()->routeIs('coach.*') ? 'nav-item-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->routeIs('coach.*') ? 'active' : ''}}"><i class="icon-grid"></i> <span>Coaches</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{request()->routeIs('coach.*') ? 'display:block' : ''}}">
+                        <li class="nav-item"><a href="{{ route('coach.create') }}" class="nav-link {{request()->routeIs('coach.create') ? 'active' : ''}}"><i
                                     class="icon-plus22"></i>
                                 Create</a></li>
-                        <li class="nav-item"><a href="{{ route('coach.view') }}" class="nav-link"><i
+                        <li class="nav-item"><a href="{{ route('coach.view') }}" class="nav-link {{request()->routeIs('coach.view') ? 'active' : ''}}"><i
                                     class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
 
                 {{-- Seats --}}
 
-                <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-chair"></i> <span>Seats</span></a>
-                    <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('seat.create') }}" class="nav-link "><i
-                                    class="icon-plus22"></i>
-                                Create</a></li>
-                        <li class="nav-item"><a href="" class="nav-link "><i class="icon-eye8"></i>View</a></li>
+                <li class="nav-item nav-item-submenu {{request()->routeIs('seat.*') ? 'nav-item-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->routeIs('seat.*') ? 'active' : ''}}"><i class="icon-chair"></i> <span>Seats</span></a>
+                    <ul class="nav nav-group-sub" style="{{request()->routeIs('seat.*')? 'display:block':''}}" data-submenu-title="Layouts">
+                        <li class="nav-item ">
+                            <a href="{{ route('seat.create') }}" class="nav-link {{request()->routeIs('seat.create') ? 'active' : ''}}">
+                                <i class="icon-plus22"></i>
+                                Create
+                            </a>
+                        </li>
+                        <li class="nav-item "><a href="{{route('seat.view')}}" class="nav-link {{request()->routeIs('seat.view') ? 'active' : ''}}"><i class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
 

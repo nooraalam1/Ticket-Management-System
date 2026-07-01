@@ -34,7 +34,8 @@ class SeatController extends Controller
 
     public function view(){
         $seats = Seat::all();
-        return view('admin.seats.view',compact('seats'));
+        $coaches = Coach::orderBy('name','asc')->get();
+        return view('admin.seats.view',compact('seats','coaches'));
     }
 
     public function edit($id){
@@ -42,7 +43,7 @@ class SeatController extends Controller
         $coaches = Coach::all();
         return view('admin.seats.edit',compact('data','coaches'));
     }
-    
+
     public function update(Request $request, $id){
         $seat = Seat::findOrFail($id);
 
@@ -62,7 +63,7 @@ class SeatController extends Controller
         $seat->update($data);
 
         return redirect()->route('seat.view')->with('success','Updated Successfully');
-        
+
     }
 
     public function delete($id){

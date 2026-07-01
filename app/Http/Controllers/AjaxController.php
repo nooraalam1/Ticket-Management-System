@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coach;
 use App\Models\Train;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,15 @@ class AjaxController extends Controller
         $train = Train::with('route.routeStops.station')->findOrFail($id);
         return response()->json([
             'train'=>$train,
+        ]);
+    }
+
+    public function coachName($id){
+
+        $coach = Coach::findOrFail($id);
+        // dd($coach);
+        return response()->json([
+            'coach'=>$coach,
         ]);
     }
 }

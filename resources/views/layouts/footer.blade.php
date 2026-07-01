@@ -11,16 +11,12 @@
         <h3>Powered By: <span class="">Noor A Alam</span></h3>
     </div>
     <div class="">
-        <h3><button onclick="openModal('terms')">Terms and Conditions</button> | <button
-                onclick="openModal('privacy')">Privacy Policy</button></h3>
+        <h3><button >Terms and Conditions</button> | <button >Privacy Policy</button></h3>
     </div>
     <div class="">
         <img src="{{ asset('logo.png') }}" alt="logo" srcset="" width="80px">
     </div>
 </div>
-
-<button onclick="closeModal('terms','privacy')" id="modalOverlay" class="hidden fixed"
-    style="z-index:1 ;color:white; background-color: red;padding:20px ;right:18%; top:5%">X</button>
 
 
 {{-- Terms Modal --}}
