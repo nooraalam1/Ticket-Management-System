@@ -391,7 +391,11 @@
                         }
                     },
                     error:function(xhr){
-                        console.log(xhr.responseJSON);
+                        Swal.fire({
+                            icon:"error",
+                            title:"Error!",
+                            text:"Something Went Wrong!"
+                        });
                     }
                 });
             });

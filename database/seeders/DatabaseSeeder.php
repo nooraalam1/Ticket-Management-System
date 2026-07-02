@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
             'phone' => '01709117776',
             'role' => 'admin',
         ]);
+        $this->call([
+            TrainSeeder::class,
+        ]);
     }
 }

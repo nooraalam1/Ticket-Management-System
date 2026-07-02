@@ -70,9 +70,9 @@
                                     <td>${data.seat_number}</td>
                                     <td>${data.seat_type}</td>
                                     <td class="d-flex align-items-center" style="gap:10px">
-                                        <a href="#"
+                                        <a href="/admin/seat/edit/${data.id}"
                                             class="btn btn-sm btn-outline-primary">Edit</a>
-                                        <form action="#" action="POST">
+                                        <form action="/admin/seat/delete/${data.id}" action="POST">
                                             @csrf
                                             <button
                                                 class="btn btn-sm btn-outline bg-pink-400 text-pink-400 border-pink-400">Delete</button>
