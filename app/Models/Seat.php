@@ -10,4 +10,5 @@ class Seat extends Model
     public function coach(){
         return $this->belongsTo(Coach::class);
     }
+
 }

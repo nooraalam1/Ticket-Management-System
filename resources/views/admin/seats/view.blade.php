@@ -34,47 +34,55 @@
             <h3 class="text-center">Seats for Coach: <span id="addCoachName"></span></h3>
             <div class="card">
                 <table class="table">
-                <thead>
-                    <tr>
-                        <th>SL</th>
-                        <th>Seat Number</th>
-                        <th>Seat Type</th>
-                        <th>Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @foreach ($stations as $key => $station)
+                    <thead>
                         <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $station->name }}</td>
-                            <td>{{ $station->code }}</td>
-                            <td class="d-flex align-items-center" style="gap:10px">
-                                <a href="{{ route('station.edit', ['id' => $station->id]) }}"
-                                    class="btn btn-sm btn-outline-primary">Edit</a>
-                                <form action="{{ route('station.delete', ['id' => $station->id]) }}" action="POST">
-                                    @csrf
-                                    <button
-                                        class="btn btn-sm btn-outline bg-pink-400 text-pink-400 border-pink-400">Delete</button>
-                                </form>
-                            </td>
+                            <th>SL</th>
+                            <th>Seat Number</th>
+                            <th>Seat Type</th>
+                            <th>Action</th>
+
                         </tr>
-                    @endforeach --}}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            $("#coach").on('change',function(){
+        $(document).ready(function () {
+            $("#coach").on('change', function () {
                 var id = $(this).val();
 
                 $.ajax({
-                    url: '/coach-name/' +id,
-                    type:'GET',
-                    success: function(response){
+                    url: '/coach-name/' + id,
+                    type: 'GET',
+                    success: function (response) {
                         $('#addCoachName').text(response.coach.name);
+                        let x = response.coach.seats;
+                        $("#tbody").html('')
+                        x.forEach(function(data,index){
+                            let row =
+                            `
+                                <tr>
+                                    <td>${index+1}</td>
+                                    <td>${data.seat_number}</td>
+                                    <td>${data.seat_type}</td>
+                                    <td class="d-flex align-items-center" style="gap:10px">
+                                        <a href="#"
+                                            class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <form action="#" action="POST">
+                                            @csrf
+                                            <button
+                                                class="btn btn-sm btn-outline bg-pink-400 text-pink-400 border-pink-400">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            `
+                            $("#tbody").append(row);
+                        });
                     }
                 })
             })

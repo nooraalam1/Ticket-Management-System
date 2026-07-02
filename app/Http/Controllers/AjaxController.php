@@ -18,8 +18,7 @@ class AjaxController extends Controller
 
     public function coachName($id){
 
-        $coach = Coach::findOrFail($id);
-        // dd($coach);
+        $coach = Coach::with('seats')->findOrFail($id);
         return response()->json([
             'coach'=>$coach,
         ]);

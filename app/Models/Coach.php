@@ -11,5 +11,8 @@ class Coach extends Model
     public function train(){
         return $this->belongsTo(Train::class);
     }
+    public function seats(){
+        return $this->hasMany(Seat::class);
+    }
 
 }
