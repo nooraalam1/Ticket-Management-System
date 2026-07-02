@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class CoachController extends Controller
 {
     public function index(){
-        $trains = Train::all();
+        $trains = Train::orderBy('name','asc')->get();
         return view('admin.coaches.index',compact('trains'));
     }
     public function store(Request $request){

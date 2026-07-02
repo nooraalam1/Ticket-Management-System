@@ -42,7 +42,7 @@
                                         <select name="train_id" class="form-control select select2" required>
                                             <option value="">Select Train</option>
                                             @foreach ($trains as $train)
-                                            <option value="{{ $train->id }}">{{ $train->name }}</option>
+                                            <option value="{{ $train->id }}">{{ $train->name }} ({{$train->train_number}})</option>
                                             @endforeach
                                         </select>
                                     </div>
