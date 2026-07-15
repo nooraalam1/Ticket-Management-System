@@ -38,7 +38,7 @@ class TrainController extends Controller
 
     public function view()
     {
-        $trains = Train::latest()->get();
+        $trains = Train::orderBy('name', 'asc')->get();
         return view('admin.trains.view', compact('trains'));
     }
 
