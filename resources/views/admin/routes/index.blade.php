@@ -47,7 +47,7 @@
                                             required>
                                             <option value="">Select Train</option>
                                             @foreach ($trains as $train)
-                                                <option value="{{ $train->id }}">{{ $train->name }} | {{$train->train_number}}</option>
+                                                <option value="{{ $train->id }}">{{ $train->name }} ({{$train->train_number}})</option>
                                             @endforeach
                                         </select>
                                         @error('train_id')

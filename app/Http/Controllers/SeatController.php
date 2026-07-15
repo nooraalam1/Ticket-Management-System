@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\CoachName;
 use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class SeatController extends Controller
 {
     public function index(){
-        $coaches = Coach::all();
+        $coaches = CoachName::all();
         return view('admin.seats.index',compact('coaches'));
     }
 

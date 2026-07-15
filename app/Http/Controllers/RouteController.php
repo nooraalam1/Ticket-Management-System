@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\DB;
 class RouteController extends Controller
 {
     public function index(){
-        $trains = Train::all();
-        $stations = Station::all();
+        $trains = Train::orderBy('name','asc')->get();
+        $stations = Station::orderBy('name','asc')->get();
         return view('admin.routes.index',compact('trains','stations'));
     }
 
@@ -66,8 +66,8 @@ class RouteController extends Controller
     }
 
     public function view(){
-        $trains = Train::all();
-        $stations = Station::all();
+        $trains = Train::orderBy('name','asc')->get();
+        $stations = Station::orderBy('name','asc')->get();
 
         return view('admin.routes.view',compact('trains','stations'));
     }

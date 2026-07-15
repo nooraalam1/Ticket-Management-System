@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\CoachName;
 use App\Models\Train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,8 @@ class CoachController extends Controller
 {
     public function index(){
         $trains = Train::orderBy('name','asc')->get();
-        return view('admin.coaches.index',compact('trains'));
+        $coachNames = CoachName::orderBy('name','asc')->get();
+        return view('admin.coaches.index',compact('trains','coachNames'));
     }
     public function store(Request $request){
         $data = $request->validate([

@@ -56,8 +56,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr style="text-align: center;">
-                                                <th>Station</th>
                                                 <th>Stop Order</th>
+                                                <th>Station</th>
                                                 <th>Arrival Time</th>
                                                 <th>Departure Time</th>
                                                 <th>Action</th>
@@ -94,14 +94,14 @@
                             let row =
                                      `
                                             <tr style="text-align: center;">
+                                                <td>
+                                                    ${data.stop_order}
+                                                </td>
 
                                                 <td >
                                                     ${data.station.name}
                                                 </td>
 
-                                                <td>
-                                                    ${data.stop_order}
-                                                </td>
                                                 <td>
                                                     ${data.arrival_time}
                                                 </td>
@@ -116,7 +116,6 @@
 
                                     `
 
-                            // $("#tbody").html(" ");
                             $("#tbody").append(row)
                         })
 

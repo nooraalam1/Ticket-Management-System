@@ -25,7 +25,7 @@
                 <div class="col-12 m-0 p-0">
                     <div class="card">
                         <div class="card-header header-elements-inline">
-                            <h5 class="card-title">Create Coaches</h5>
+                            <h5 class="card-title">Create Coach Combinations:</h5>
                             <div class="header-elements">
                                 <div class="list-icons">
                                     <a class="list-icons-item" data-action="collapse"></a>
@@ -42,14 +42,19 @@
                                         <select name="train_id" class="form-control select select2" required>
                                             <option value="">Select Train</option>
                                             @foreach ($trains as $train)
-                                            <option value="{{ $train->id }}">{{ $train->name }} ({{$train->train_number}})</option>
+                                            <option value="{{ $train->id }}" {{old('train_id')==$train->id?'selected':''}}>{{ $train->name }} ({{$train->train_number}})</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group col-4">
                                         <label>Enter Coach Name:<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" required class="form-control" placeholder="KHA"
-                                            value="{{old('name')}}">
+                                        <select name="name" class="form-control select select2" required >
+                                            <option value="">Select Coach Name</option>
+                                            @foreach ($coachNames as $coachName)
+                                                <option value="{{ $coachName->name }}" {{old('name')==$coachName->name?'selected':''}}>{{ $coachName->name }}</option>
+                                            @endforeach
+                                        </select>
+
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
