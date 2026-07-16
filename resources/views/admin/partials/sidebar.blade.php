@@ -107,9 +107,9 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-location4"></i> <span>Trips</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="#" class="nav-link"><i class="icon-plus22"></i>
+                        <li class="nav-item"><a href="{{ route('trip.create') }}" class="nav-link"><i class="icon-plus22"></i>
                                 Create</a></li>
-                        <li class="nav-item"><a href="{{ route('trip.create') }}" class="nav-link"><i class="icon-eye8"></i>View</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="icon-eye8"></i>View</a></li>
                     </ul>
                 </li>
 
