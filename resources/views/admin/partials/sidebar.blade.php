@@ -76,8 +76,20 @@
 
                 {{-- Coaches --}}
 
+                <li class="nav-item nav-item-submenu {{request()->routeIs('coachname.*') ? 'nav-item-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->routeIs('coachname.*') ? 'active' : ''}}"><i class="icon-clipboard"></i> <span>Coach Name</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{request()->routeIs('coachname.*') ? 'display:block' : ''}}">
+                        <li class="nav-item"><a href="{{ route('coachname.create') }}" class="nav-link {{request()->routeIs('coach.create') ? 'active' : ''}}"><i
+                                    class="icon-plus22"></i>
+                                Create</a></li>
+                        <li class="nav-item"><a href="{{ route('coachname.view') }}" class="nav-link {{request()->routeIs('coachname.view') ? 'active' : ''}}"><i
+                                    class="icon-eye8"></i>View</a></li>
+                    </ul>
+                </li>
+                {{-- Coach Combination --}}
+
                 <li class="nav-item nav-item-submenu {{request()->routeIs('coach.*') ? 'nav-item-open' : ''}}">
-                    <a href="#" class="nav-link {{request()->routeIs('coach.*') ? 'active' : ''}}"><i class="icon-grid"></i> <span>Coaches</span></a>
+                    <a href="#" class="nav-link {{request()->routeIs('coach.*') ? 'active' : ''}}"><i class="icon-grid"></i> <span>Coach Combination</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{request()->routeIs('coach.*') ? 'display:block' : ''}}">
                         <li class="nav-item"><a href="{{ route('coach.create') }}" class="nav-link {{request()->routeIs('coach.create') ? 'active' : ''}}"><i
                                     class="icon-plus22"></i>

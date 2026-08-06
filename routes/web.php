@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\CoachnameController;
 use App\Http\Controllers\FareController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
@@ -51,8 +52,18 @@ Route::middleware(['auth', 'role:admin'])
 
             Route::post('/checkDuplicate',[TrainController::class,'checkDuplicate'])->name('checkDuplicate');
         });
+        //coachname routes
 
-        //coaches route
+        Route::group(['prefix' => 'coachname', 'as' => 'coachname.'], function () {
+            Route::get('/create', [CoachnameController::class, 'index'])->name('create');
+            Route::post('/store', [CoachnameController::class, 'store'])->name('store');
+            Route::get('/view', [CoachnameController::class, 'view'])->name('view');
+            Route::get('/edit/{id}', [CoachnameController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [CoachnameController::class, 'update'])->name('update');
+            Route::get('/delete/{id}', [CoachnameController::class, 'delete'])->name('delete');
+        });
+
+        //coach combination route
 
         Route::group(['prefix' => 'coach', 'as' => 'coach.'], function () {
             Route::get('/create', [CoachController::class, 'index'])->name('create');

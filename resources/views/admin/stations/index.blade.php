@@ -9,7 +9,6 @@
                     <div class="page-title">
                         <div class="breadcrumb ml-0 mb-1">
                             <h5 class="breadcrumb-item py-0">Stations</h5>
-                            {{-- <a href="components_breadcrumbs.html" class="breadcrumb-item py-0">View</a> --}}
                             <h5 class="breadcrumb-item py-0 active">Create</h5>
                         </div>
                     </div>
