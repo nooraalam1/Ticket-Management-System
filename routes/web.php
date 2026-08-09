@@ -131,6 +131,7 @@ Route::middleware(['auth', 'role:user'])
 //other ajax routes
 
 Route::get('/train-name/{id}', [AjaxController::class, 'trainName'])->name('trainName');
+Route::get('/coach-name/{id}', [AjaxController::class, 'coachName'])->name('coachName');
  
 //Common Routes
 

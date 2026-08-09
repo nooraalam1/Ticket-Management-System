@@ -93,26 +93,26 @@
                         x.forEach(function(data){
                             let row =
                                      `
-                                            <tr style="text-align: center;">
-                                                <td>
-                                                    ${data.stop_order}
-                                                </td>
+                                        <tr style="text-align: center;">
+                                            <td>
+                                                ${data.stop_order}
+                                            </td>
 
-                                                <td >
-                                                    ${data.station.name}
-                                                </td>
+                                            <td >
+                                                ${data.station.name}
+                                            </td>
 
-                                                <td>
-                                                    ${data.arrival_time}
-                                                </td>
-                                                <td>
-                                                    ${data.departure_time}
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-danger">Edit</button>
-                                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                                </td>
-                                            </tr>
+                                            <td>
+                                                ${data.arrival_time}
+                                            </td>
+                                            <td>
+                                                ${data.departure_time}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger">Edit</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
 
                                     `
 

@@ -24,7 +24,7 @@
         <div class="">
             <div class="d-flex justify-content-center" style="gap: 10px">
                 <h2 class="">Select a coach to see seats:</h2>
-                <select name="coach" id="coach" class="form-control select select2 col-2">
+                <select name="coach" id="coach_name" class="form-control select select2 col-2">
                     <option value="">Select Coach</option>
                     @foreach ($coaches as $coach)
                         <option value="{{$coach->id}}">{{$coach->name}}</option>
@@ -36,10 +36,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>SL</th>
-                            <th>Seat Number</th>
-                            <th>Seat Type</th>
-                            <th>Action</th>
+                            <th style="text-align: center;">Seat Number</th>
+                            <th style="text-align: center;">Seat Type</th>
+                            <th style="text-align: center;">Action</th>
 
                         </tr>
                     </thead>
@@ -51,41 +50,52 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $("#coach").on('change', function () {
-                var id = $(this).val();
+        $(document).ready(function(){
+            $('#coach_name').on('change',function(){
+                let id = $(this).val();
+                console.log(id);
 
-                $.ajax({
-                    url: '/coach-name/' + id,
-                    type: 'GET',
-                    success: function (response) {
-                        $('#addCoachName').text(response.coach.name);
-                        let x = response.coach.seats;
-                        $("#tbody").html('')
-                        x.forEach(function(data,index){
-                            let row =
-                            `
-                                <tr>
-                                    <td>${index+1}</td>
-                                    <td>${data.seat_number}</td>
-                                    <td>${data.seat_type}</td>
-                                    <td class="d-flex align-items-center" style="gap:10px">
-                                        <a href="/admin/seat/edit/${data.id}"
-                                            class="btn btn-sm btn-outline-primary">Edit</a>
-                                        <form action="/admin/seat/delete/${data.id}" action="POST">
-                                            @csrf
-                                            <button
-                                                class="btn btn-sm btn-outline bg-pink-400 text-pink-400 border-pink-400">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                if(id){
+                    $.ajax({
+                        url:'/coach-name/'+id,
+                        type:'get',
+                        success:function(response){
+                            // console.log(response);
+                            $('#addCoachName').text(response.coach.name);
 
-                            `
-                            $("#tbody").append(row);
-                        });
-                    }
-                })
-            })
-        })
+                            $('#tbody').html('');
+
+                            let x = response.coach.seat_no;
+                            x.forEach(function(data){
+                                let row = `
+                                    <tr style="text-align: center;">
+                                            <td>
+                                                ${data.seat_number}
+                                            </td>
+
+                                            <td >
+                                                ${data.seat_type}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger">Edit</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+
+                                `
+                                $('#tbody').append(row);
+                            })
+                            
+                        },
+                        error: function(xhr){
+                            alert("Something Went Wrong!");
+                        }
+                    });
+                }
+                else{
+                    $('#addCoachName').text('');
+                }
+            });
+        });
     </script>
 @endsection

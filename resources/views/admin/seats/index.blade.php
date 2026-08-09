@@ -10,7 +10,6 @@
                     <div class="page-title">
                         <div class="breadcrumb ml-0 mb-1">
                             <h5 class="breadcrumb-item py-0">Seats</h5>
-                            {{-- <a href="components_breadcrumbs.html" class="breadcrumb-item py-0">View</a> --}}
                             <h5 class="breadcrumb-item py-0 active">Create</h5>
                         </div>
                     </div>
@@ -39,7 +38,7 @@
                                 <div class="row">
                                     <div class="form-group col-4">
                                         <label>Select Coach:<span class="text-danger">*</span></label>
-                                        <select name="coach_id" class="form-control">
+                                        <select name="coach_name_id" class="form-control">
                                             <option value="">--Select Coach--</option>
                                             @foreach ($coaches as $coach)
                                                 <option value="{{ $coach->id }}">{{ $coach->name }}</option>

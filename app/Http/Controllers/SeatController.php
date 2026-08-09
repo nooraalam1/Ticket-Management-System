@@ -17,25 +17,27 @@ class SeatController extends Controller
 
     public function store(Request $request){
         $data = $request->validate([
-            'coach_id'=>['required'],
+            'coach_name_id'=>['required'],
             'seat_number'=>['required'],
             'seat_type'=>['required']
         ]);
     $duplicate = DB::table('seats')
-                ->where('coach_id',$request->coach_id)
+                ->where('coach_name_id',$request->coach_name_id)
                 ->where('seat_number',$request->seat_number)
                 ->exists();
     if($duplicate){
         return back()->with('error','This coach and seat already added');
     }
+        else{
         Seat::create($data);
 
         return redirect()->route('seat.view')->with('success','Seat Added Successfully');
     }
+    }
 
     public function view(){
-        $seats = Seat::all();
-        $coaches = Coach::orderBy('name','asc')->get();
+        $seats = Seat::orderBy('seat_number','asc')->get();
+        $coaches = CoachName::orderBy('name','asc')->get();
         return view('admin.seats.view',compact('seats','coaches'));
     }
 

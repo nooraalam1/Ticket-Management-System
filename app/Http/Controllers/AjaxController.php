@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coach;
 use App\Models\Train;
 use Illuminate\Http\Request;
+use App\Models\CoachName;
 
 class AjaxController extends Controller
 {
@@ -17,10 +18,9 @@ class AjaxController extends Controller
     }
 
     public function coachName($id){
-
-        $coach = Coach::with('seats')->findOrFail($id);
+        $data = CoachName::with('seatNo')->findOrFail($id);
         return response()->json([
-            'coach'=>$coach,
+            'coach'=>$data,
         ]);
     }
 }
